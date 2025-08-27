@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mario-clone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mario-clone
+  template:
+    metadata:
+      labels:
+        app: mario-clone
+    spec:
+      containers:
+      - name: mario-clone
+        image: <ACR_LOGIN_SERVER>/mario-clone:latest
+        ports:
+        - containerPort: 8080
