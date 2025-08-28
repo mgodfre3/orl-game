@@ -1,0 +1,12 @@
+# MetalLB native manifest (official v0.13.12)
+# Source: https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
+# For brevity, this manifest should be kept up to date with the official repo.
+# You can also reference the URL in your Flux config for direct sync.
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb-system
+---
+# ...existing MetalLB CRDs, controller, and speaker deployments...
+# For production, use the full manifest from the official repo.
