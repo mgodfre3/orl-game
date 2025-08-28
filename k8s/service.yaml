@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mario-clone-service
+  namespace: mario-gitops
 spec:
   type: LoadBalancer
   selector:
