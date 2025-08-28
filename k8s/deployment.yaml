@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: mario-clone
-        image: <ACR_LOGIN_SERVER>/mario-clone:latest
+        image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:latest
         ports:
         - containerPort: 8080
