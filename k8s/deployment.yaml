@@ -14,9 +14,9 @@ spec:
         app: mario-clone
     spec:
       containers:
-      - name: mario-clone
-        image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:latest
-        ports:
-        - containerPort: 8080
+        - name: mario-clone
+          image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:latest
+          ports:
+            - containerPort: 8080
       imagePullSecrets:
-      - name: acr-auth
+        - name: acr-auth
