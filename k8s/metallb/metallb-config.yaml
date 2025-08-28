@@ -2,7 +2,7 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: default-addresspool
-  namespace: metallb-system
+  namespace: kube-system
 spec:
   addresses:
   - 10.20.243.10-10.20.243.240
@@ -11,5 +11,5 @@ apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
   name: default
-  namespace: metallb-system
+  namespace: kube-system
 spec: {}
