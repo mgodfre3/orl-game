@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   addresses:
-  - 10.20.243.220
+    - 10.20.243.220-10.20.243.220
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
@@ -14,4 +14,5 @@ metadata:
   namespace: kube-system
 spec: {}
 ---
+image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:v2
 
