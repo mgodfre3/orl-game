@@ -3,8 +3,9 @@ kind: Service
 metadata:
   name: mario-clone-service
   namespace: mario-gitops
+spec:
   type: LoadBalancer
-  loadBalancerIP: 10.20.243.15
+  loadBalancerIP: 10.20.243.220
   selector:
     app: mario-clone
   ports:
