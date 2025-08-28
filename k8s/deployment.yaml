@@ -18,5 +18,12 @@ spec:
           image: acxcontregwus2.azurecr.io/mario-clone:latest
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
       imagePullSecrets:
         - name: acr-auth
