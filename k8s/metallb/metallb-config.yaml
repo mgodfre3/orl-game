@@ -13,6 +13,4 @@ metadata:
   name: default
   namespace: kube-system
 spec: {}
----
-image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:v2
 
