@@ -6,10 +6,26 @@ metadata:
 spec:
   type: LoadBalancer
   # optional: request specific IP from your MetalLB pool
-  # loadBalancerIP: 10.20.243.220
+  loadBalancerIP: 10.20.243.221
   selector:
     app: opensonic
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
+
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default-addresspool
+  namespace: kube-system
+spec:
+  addresses:
+    - 10.20.243.220-10.20.243.221
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: default
+  namespace: kube-system
+spec: {}
