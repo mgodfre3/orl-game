@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: opensonic-service
+  namespace: opensonic
+spec:
+  type: LoadBalancer
+  # optional: request specific IP from your MetalLB pool
+  # loadBalancerIP: 10.20.243.220
+  selector:
+    app: opensonic
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
