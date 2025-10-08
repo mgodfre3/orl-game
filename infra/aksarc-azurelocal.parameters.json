@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "clusterName": {
+      "value": "mario-aksarc"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "customLocationName": {
+      "value": "<YOUR_CUSTOM_LOCATION>"
+    },
+    "logicalNetworkName": {
+      "value": "<YOUR_LOGICAL_NETWORK>"
+    },
+    "sshKeyName": {
+      "value": "mario-cluster-key"
+    },
+    "nodeVmSize": {
+      "value": "Standard_A2_v2"
+    },
+    "nodeCount": {
+      "value": 2
+    },
+    "controlPlaneCount": {
+      "value": 1
+    },
+    "aadAdminGroupObjectIds": {
+      "value": [
+        "<YOUR_AAD_ADMIN_GROUP_ID>"
+      ]
+    },
+    "gatewayResourceId": {
+      "value": "<YOUR_ARC_GATEWAY_RESOURCE_ID>"
+    },
+    "enableAhub": {
+      "value": true
+    },
+    "kubernetesVersion": {
+      "value": "1.28.9"
+    }
+  }
+}
