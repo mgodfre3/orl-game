@@ -5,7 +5,7 @@ metadata:
   namespace: mario-gitops
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.20.243.220
+  loadBalancerIP: 172.22.86.240
   selector:
     app: mario-clone
   ports:
