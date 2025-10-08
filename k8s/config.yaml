@@ -1,0 +1,57 @@
+## Customizing the LoadBalancer IP
+
+To deploy this Mario game with a different IP address, update the values in `k8s/config.yaml`:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deployment-config
+  namespace: mario-gitops
+data:
+  LOADBALANCER_IP: "YOUR_IP_HERE"
+  LOADBALANCER_IP_RANGE: "YOUR_IP_HERE-YOUR_IP_HERE"
+```
+
+### Example for different IP ranges:
+
+**Single IP:**
+```yaml
+data:
+  LOADBALANCER_IP: "192.168.1.100"
+  LOADBALANCER_IP_RANGE: "192.168.1.100-192.168.1.100"
+```
+
+**IP Range:**
+```yaml
+data:
+  LOADBALANCER_IP: "192.168.1.100"  # First IP from the range
+  LOADBALANCER_IP_RANGE: "192.168.1.100-192.168.1.110"
+```
+
+### Alternative: Override at deployment time
+
+You can also override the values using Kustomize:
+
+```bash
+# Create a custom kustomization
+cat <<EOF > kustomization-custom.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - k8s
+
+configMapGenerator:
+  - name: deployment-config
+    literals:
+      - LOADBALANCER_IP=YOUR_IP_HERE
+      - LOADBALANCER_IP_RANGE=YOUR_IP_HERE-YOUR_IP_HERE
+    behavior: replace
+
+namespace: mario-gitops
+EOF
+
+# Deploy with custom values
+kubectl apply -k .
+```

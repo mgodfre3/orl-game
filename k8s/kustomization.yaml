@@ -1,8 +1,53 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
   - deployment.yaml
   - service.yaml
   - hpa.yaml
-  - metallb/metallb-native.yaml
   - metallb/metallb-config.yaml
+  - config.yaml
+
+configMapGenerator:
+  - name: deployment-config
+    literals:
+      - LOADBALANCER_IP=172.22.86.240
+      - LOADBALANCER_IP_RANGE=172.22.86.240-172.22.86.240
+
+vars:
+  - name: LOADBALANCER_IP
+    objref:
+      kind: ConfigMap
+      name: deployment-config
+      apiVersion: v1
+    fieldref:
+      fieldpath: data.LOADBALANCER_IP
+  - name: LOADBALANCER_IP_RANGE
+    objref:
+      kind: ConfigMap
+      name: deployment-config
+      apiVersion: v1
+    fieldref:
+      fieldpath: data.LOADBALANCER_IP_RANGE
+
+replacements:
+  - source:
+      kind: ConfigMap
+      name: deployment-config
+      fieldPath: data.LOADBALANCER_IP
+    targets:
+      - select:
+          kind: Service
+          name: mario-clone-service
+        fieldPaths:
+          - spec.loadBalancerIP
+  - source:
+      kind: ConfigMap
+      name: deployment-config
+      fieldPath: data.LOADBALANCER_IP_RANGE
+    targets:
+      - select:
+          kind: IPAddressPool
+          name: default-addresspool
+        fieldPaths:
+          - spec.addresses.[0]
