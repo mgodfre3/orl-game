@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  namespace: mario-gitops
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: load-generator
+  template:
+    metadata:
+      labels:
+        app: load-generator
+    spec:
+      containers:
+        - name: load
+          image: curlimages/curl:8.3.0
+          command:
+            - sh
+            - -c
+            - |
+              # spawn a few concurrent requests each loop to increase CPU
+              while true; do
+                for i in 1 2 3 4 5; do
+                  curl -sS http://mario-clone-service:80 >/dev/null &
+                done
+                wait
+                sleep 0.01
+              done
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-stress
+  namespace: mario-gitops
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      app: cpu-stress
+  template:
+    metadata:
+      labels:
+        app: cpu-stress
+    spec:
+      containers:
+        - name: stress
+          image: python:3.11-slim
+          command: ["/bin/sh","-c"]
+          args:
+            - |
+              python - <<'PY'
+              import threading, time
+
+              def burn():
+                  x = 0
+                  while True:
+                      x = x * 2 + 1
+
+              # start one CPU-bound thread per container
+              t = threading.Thread(target=burn)
+              t.daemon = True
+              t.start()
+
+              # keep the process alive
+              while True:
+                  time.sleep(60)
+              PY
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+      terminationGracePeriodSeconds: 5
