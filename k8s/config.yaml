@@ -55,3 +55,52 @@ EOF
 # Deploy with custom values
 kubectl apply -k .
 ```
+
+### Example with a custom namespace
+
+To deploy the game in a custom namespace, create a namespace and update the config map accordingly:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mario-game
+  labels:
+    name: mario-game
+    app.kubernetes.io/name: mario-game
+    app.kubernetes.io/managed-by: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deployment-config
+  namespace: mario-game
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+data:
+  LOADBALANCER_IP: "172.22.86.240"
+  LOADBALANCER_IP_RANGE: "172.22.86.240-172.22.86.240"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: acr-auth
+  namespace: mario-game
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJhY3hjb250cmVnd3VzMi1jNmNoY2dmamFyZGFmc2I1LmF6dXJlY3IuaW8iOnsidXNlcm5hbWUiOiJhY3hjb250cmVnd3VzMi1jNmNoY2dmamFyZGFmc2I1IiwicGFzc3dvcmQiOiJPUzZFcjBxQTdqVkVWZzNWZmM3TFVxRkFyUEpDMHJ0dWJkd0Q4dm02cGx1NThpV3AyQSIsImF1dGgiOiJZV040WTI5dWRISmxaM2QxY3pJdFl6WmphR05uWm1waGNtUmhabk5pTlRwUFV6WkZjakJ4UVRkcVZrVldaek5XWm1NM1RGVnhSa0Z5VUVwRE1ISnVkV0prZDFRNGRtMDJjR3gxTlRocFYzQXlRUT09In19fQ==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ip-config
+  namespace: mario-game
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+data:
+  loadbalancer-ip: "172.22.86.240"
+  ip-range: "172.22.86.240-172.22.86.240"

@@ -5,7 +5,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-    - ${LOADBALANCER_IP_RANGE}
+    - 172.22.86.148-172.22.86.149  # Range including both IPs
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
