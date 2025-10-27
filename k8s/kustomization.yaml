@@ -11,6 +11,7 @@ namespace: mario-game
 
 # Resources to be deployed
 resources:
+  - namespace.yaml        # Add this line
   - config.yaml
   - deployment.yaml
   - service.yaml
@@ -21,8 +22,8 @@ resources:
 configMapGenerator:
   - name: deployment-config
     literals:
-      - LOADBALANCER_IP=172.22.86.148          # Change this
-      - LOADBALANCER_IP_RANGE=172.22.86.148-172.22.86.148  # And this
+      - LOADBALANCER_IP=172.22.86.148
+      - LOADBALANCER_IP_RANGE=172.22.86.148-172.22.86.148
 
 # Replace IP values in resources
 replacements:

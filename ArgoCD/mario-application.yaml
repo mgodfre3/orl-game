@@ -1,0 +1,114 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mario-clone
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    app.kubernetes.io/name: mario-clone
+    app.kubernetes.io/part-of: mario-game
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: mario-game
+  
+  # Source configuration - pointing to your git repository
+  source:
+    repoURL: https://github.com/mgodfre3/orl-game.git
+    targetRevision: HEAD
+    path: k8s
+  
+  # Destination cluster and namespace
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mario-game
+  
+  # Sync policy configuration
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+      - SkipDryRunOnMissingResource=true
+      - RespectIgnoreDifferences=true
+    
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m0s
+
+  # Ignore differences for certain fields
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+    - group: autoscaling
+      kind: HorizontalPodAutoscaler
+      jsonPointers:
+        - /spec/minReplicas
+        - /spec/maxReplicas
+
+---
+# ArgoCD Project for Mario Game (optional but recommended)
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: mario-game
+  namespace: argocd
+spec:
+  description: Mario Clone Game Project
+  
+  # Source repositories allowed for this project
+  sourceRepos:
+    - 'https://github.com/mgodfre3/orl-game.git'
+    - 'https://github.com/mgodfre3/*'
+  
+  # Destination clusters and namespaces allowed
+  destinations:
+    - namespace: mario-game
+      server: https://kubernetes.default.svc
+    - namespace: mario-game-staging
+      server: https://kubernetes.default.svc
+    - namespace: metallb-system
+      server: https://kubernetes.default.svc
+  
+  # Cluster resource whitelist
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+    - group: metallb.io
+      kind: IPAddressPool
+    - group: metallb.io
+      kind: L2Advertisement
+  
+  # Namespace resource whitelist
+  namespaceResourceWhitelist:
+    - group: ''
+      kind: ConfigMap
+    - group: ''
+      kind: Secret
+    - group: ''
+      kind: Service
+    - group: apps
+      kind: Deployment
+    - group: autoscaling
+      kind: HorizontalPodAutoscaler
+  
+  roles:
+    - name: admin
+      description: Admin role for mario-game project
+      policies:
+        - p, proj:mario-game:admin, applications, *, mario-game/*, allow
+        - p, proj:mario-game:admin, repositories, *, *, allow
+      groups:
+        - 'be0c17dc-9a37-48c5-9691-751a27a4c1b9'  # Your Entra group
+        - 'f5157bd2-8ce4-48b6-82df-69b9de7540a9'  # Your Entra group

@@ -1,0 +1,10 @@
+﻿apiVersion: v1
+kind: Namespace
+metadata:
+  name: mario-game
+  labels:
+    name: mario-game
+    app.kubernetes.io/name: mario-game
+    app.kubernetes.io/managed-by: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"

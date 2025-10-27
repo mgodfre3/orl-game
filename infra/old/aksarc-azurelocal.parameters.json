@@ -39,6 +39,24 @@
     },
     "kubernetesVersion": {
       "value": "1.28.9"
+    },
+    "gitRepoUrl": {
+      "value": "https://github.com/mgodfre3/orl-game"
+    },
+    "gitRepoBranch": {
+      "value": "main"
+    },
+    "gitRepoPath": {
+      "value": "k8s"
+    },
+    "enableArgoCD": {
+      "value": true
+    },
+    "enableMetalLB": {
+      "value": true
+    },
+    "loadBalancerIP": {
+      "value": "172.22.86.240"
     }
   }
 }

@@ -40,7 +40,13 @@
       "value": true
     },
     "kubernetesVersion": {
-      "value": "1.28.9"
+      "value": "1.30.9"
+    },
+    "enableArgoCD": {
+      "value": true
+    },
+    "enableMetalLB": {
+      "value": true
     }
   }
 }

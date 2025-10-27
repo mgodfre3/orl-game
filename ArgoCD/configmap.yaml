@@ -1,0 +1,25 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+# configmaps "argocd-cmd-params-cm" was not valid:
+# * patch: Invalid value: "map[metadata:map[set `server.insecure:true]]": strict decoding error: unknown field "metadata.set `server.insecure"
+#
+apiVersion: v1
+data:
+  application.namespaces: namespace1,namespace2
+  server.insecure: "true"
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: argocd
+    meta.helm.sh/release-namespace: argocd
+  creationTimestamp: "2025-10-23T16:48:51Z"
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argocd-cmd-params-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cmd-params-cm
+  namespace: argocd
+  resourceVersion: "307191"
+  uid: 3fc9cc50-3c85-40a5-973a-96d0af9dccb0
