@@ -11,19 +11,12 @@ namespace: mario-game
 
 # Resources to be deployed
 resources:
-  - namespace.yaml        # Add this line
+  - namespace.yaml
   - config.yaml
   - deployment.yaml
   - service.yaml
   - hpa.yaml
   - metallb/metallb-config.yaml
-
-# Generate ConfigMap with IP configuration
-configMapGenerator:
-  - name: deployment-config
-    literals:
-      - LOADBALANCER_IP=172.22.86.148
-      - LOADBALANCER_IP_RANGE=172.22.86.148-172.22.86.148
 
 # Replace IP values in resources
 replacements:
@@ -46,7 +39,7 @@ replacements:
           kind: IPAddressPool
           name: default-addresspool
         fieldPaths:
-          - spec.addresses.[0]
+          - spec.addresses.0
 
 # Container image configuration
 images:
@@ -55,11 +48,12 @@ images:
     newTag: v3
 
 # Common labels for all resources
-commonLabels:
-  app.kubernetes.io/name: mario-clone
-  app.kubernetes.io/instance: mario-clone
-  app.kubernetes.io/managed-by: argocd
-  app.kubernetes.io/part-of: mario-game
+labels:
+  - pairs:
+      app.kubernetes.io/name: mario-clone
+      app.kubernetes.io/instance: mario-clone
+      app.kubernetes.io/managed-by: argocd
+      app.kubernetes.io/part-of: mario-game
 
 # Common annotations
 commonAnnotations:

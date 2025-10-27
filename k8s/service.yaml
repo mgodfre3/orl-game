@@ -2,10 +2,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mario-clone-service
-  namespace: mario-gitops
+  namespace: mario-game
 spec:
   type: LoadBalancer
-  loadBalancerIP: ${LOADBALANCER_IP}
+  loadBalancerIP: "172.22.86.148"
   selector:
     app: mario-clone
   ports:
