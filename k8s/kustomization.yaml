@@ -1,11 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-metadata:
-  name: mario-clone
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-
 # Namespace for all resources
 namespace: mario-game
 
@@ -16,45 +11,9 @@ resources:
   - deployment.yaml
   - service.yaml
   - hpa.yaml
-  - metallb/metallb-config.yaml
-
-# Replace IP values in resources
-replacements:
-  - source:
-      kind: ConfigMap
-      name: deployment-config
-      fieldPath: data.LOADBALANCER_IP
-    targets:
-      - select:
-          kind: Service
-          name: mario-clone-service
-        fieldPaths:
-          - spec.loadBalancerIP
-  - source:
-      kind: ConfigMap
-      name: deployment-config
-      fieldPath: data.LOADBALANCER_IP_RANGE
-    targets:
-      - select:
-          kind: IPAddressPool
-          name: default-addresspool
-        fieldPaths:
-          - spec.addresses.0
 
 # Container image configuration
 images:
   - name: mario-clone
     newName: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone
-    newTag: v3
-
-# Common labels for all resources
-labels:
-  - pairs:
-      app.kubernetes.io/name: mario-clone
-      app.kubernetes.io/instance: mario-clone
-      app.kubernetes.io/managed-by: argocd
-      app.kubernetes.io/part-of: mario-game
-
-# Common annotations
-commonAnnotations:
-  argocd.argoproj.io/sync-wave: "0"
+    newTag: v2
