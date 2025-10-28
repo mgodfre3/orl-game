@@ -1,8 +1,10 @@
+# Update deployment to use latest tag (to fix the image pull issue)
+@'
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mario-clone
-  namespace: mario-game  # Fixed from mario-gitops
+  namespace: mario-game
 spec:
   replicas: 1
   selector:
@@ -15,9 +17,9 @@ spec:
     spec:
       containers:
         - name: mario-clone
-          image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:v3
+          image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:latest
           ports:
-            - containerPort: 80  # Changed from 8080 to 80
+            - containerPort: 80
           resources:
             requests:
               cpu: "100m"
@@ -27,3 +29,4 @@ spec:
               memory: "512Mi"
       imagePullSecrets:
         - name: acr-auth
+'@ | Out-File -FilePath "k8s\deployment.yaml" -Encoding UTF8 -Force
