@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mario-clone
-  namespace: mario-gitops
+  namespace: mario-game  # Fixed from mario-gitops
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
         - name: mario-clone
           image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:v3
           ports:
-            - containerPort: 8080
+            - containerPort: 80  # Changed from 8080 to 80
           resources:
             requests:
               cpu: "100m"
