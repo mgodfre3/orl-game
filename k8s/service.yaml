@@ -5,7 +5,7 @@ metadata:
   namespace: mario-game
 spec:
   type: LoadBalancer
-  loadBalancerIP: "172.22.86.148"
+  # loadBalancerIP removed - MetalLB will auto-assign from pool
   selector:
     app: mario-clone
   ports:
