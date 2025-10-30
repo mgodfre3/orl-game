@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
 spec:
   type: LoadBalancer
-  loadBalancerIP: "172.22.86.149"
+  loadBalancerIP: "172.22.232.179"  # Use the other IP from the pool
   ports:
     - name: http
       port: 80
