@@ -1,0 +1,35 @@
+﻿# Mario Clone Deployment Configuration
+# Copy this file and customize for different clusters
+
+# Azure Container Registry settings
+acr:
+  name: acxcontregwus2
+  registry: acxcontregwus2-c6chcgfjardafsb5.azurecr.io
+
+# Docker image settings
+image:
+  name: mario-clone
+  tag: v2
+
+# Network configuration
+network:
+  marioIP: 172.22.86.148
+  argoCDIP: 172.22.86.149
+  ipRange: 172.22.86.148-172.22.86.149
+
+# Git repository
+git:
+  repo: https://github.com/mgodfre3/orl-game.git
+  branch: main
+
+# Kubernetes namespaces
+kubernetes:
+  namespace: mario-game
+  argoCDNamespace: argocd
+  metallbNamespace: kube-system
+
+# Deployment options
+deployment:
+  autoBuild: true
+  autoSync: true
+  updateGit: false
