@@ -244,7 +244,7 @@ function setAreaPreCreation(area) {
   startDataTime();
   
   // Custom title for World 1-1
-  if(currentmap[0] == 1 && currentmap[1] == 1) {
+  if(currentmap[0] === 1 && currentmap[1] === 1) {
     data.world.element.innerHTML = "Super Mario-Arc AKS Edition<br>WORLD " + data.world.amount;
   }
   
