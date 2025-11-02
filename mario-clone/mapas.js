@@ -1104,25 +1104,24 @@ function World11(map) {
       setLocationGeneration(0);
       
       var greeter = "";
-      greeter += "<div style='width:350px;max-height:189px;background-color:#d64d00;border-radius:7px;box-shadow:3px 3px #efb28b inset, -3px -3px black inset;";
+      greeter += "<div style='width:320px;background-color:#d64d00;border-radius:7px;box-shadow:3px 3px #efb28b inset, -3px -3px black inset;";
       greeter += "background-image: url(\"Theme/Greeting.gif\"), url(\"Theme/Greeting.gif\"), url(\"Theme/Greeting.gif\"), url(\"Theme/Greeting.gif\");";
       greeter += "background-repeat: no-repeat;";
-      greeter += "background-position: 7px 7px, 336px 7px, 7px 168px, 336px 168px";
+      greeter += "background-position: 7px 7px, 306px 7px, 7px 168px, 306px 168px;";
+      greeter += "position:relative;padding:10px 68px 10px 10px;";
       greeter += "'>";
-      greeter += "  <p style='text-align:left;padding:7px 0 11px 11px;color:#ffcccc;font-family: Super Plumber Bros;font-size:77px;text-shadow:3px 8px black'>";
-      greeter += "    <span style='font-size:84px'>super</span>";
-      greeter += "    <br><br>"; // To do: make this not so font dependant
-      greeter += "    <span style='font-size:75px;line-height:76px'>MARIO HTML5</span>";
-      greeter += "  </p>";
+      greeter += "  <img src='Theme/8bit-azure.png' style='width:55px;height:55px;position:absolute;top:50%;right:7px;transform:translateY(-50%);' />";
+      greeter += "  <div style='color:#ffcccc;font-family: Super Plumber Bros;text-shadow:3px 8px black'>";
+      greeter += "    <div style='font-size:48px;line-height:46px;margin-bottom:5px'>SUPER MARIO</div>";
+      greeter += "    <div style='font-size:36px;line-height:36px'>Azure Arc Edition</div>";
+      greeter += "  </div>";
       greeter += "</div>";
-      greeter += "<p id='explanation' style='text-align:center;<!--/*text-shadow:2px 2px 1px black;*/-->margin-left:7px;'>";
+      greeter += "<p id='explanation' style='text-align:center;margin-left:7px;margin-top:10px;'>";
       greeter += "  Arrow/WASD keys move";
       greeter += "  <br>";
       greeter += "  Shift to fire/sprint";
       greeter += "  <br>";
       greeter += "  P/M to pause/mute";
-      // greeter += "  <br>";
-      // greeter += "  TOP- " + (localStorage.highscore || "000000");
       greeter += "</p>";
       pushPreText(greeter, 20, 91);
       
