@@ -1,4 +1,4 @@
-﻿apiVersion: kustomize.config.k8s.io/v1beta1
+apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 # Namespace for all resources
@@ -15,5 +15,9 @@ resources:
 # Container image configuration
 images:
   - name: mario-clone
-    newName: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone
-    newTag: latest
+    newName: /mario-clone
+    newTag: v4
+
+
+
+
