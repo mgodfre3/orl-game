@@ -8,3 +8,4 @@ resources:
 
 patchesStrategicMerge:
   - service-patch.yaml
+  - argocd-server-lb-patch.yaml  # ← ADD THIS LINE

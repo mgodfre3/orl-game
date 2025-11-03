@@ -9,6 +9,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - hpa.yaml
+  - argocd-server-lb.yaml  # ← ADD THIS LINE
 
 images:
   - name: mario-clone
