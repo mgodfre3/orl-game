@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: acr-auth
+  namespace: mario-game
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJhY3hjb250cmVnd3VzMi1jNmNoY2dmamFyZGFmc2I1LmF6dXJlY3IuaW8iOnsidXNlcm5hbWUiOiJhY3hjb250cmVnd3VzMiIsInBhc3N3b3JkIjoiaUxUKzlKS2d4cHYwN3drSVhFOGRmU1ROaXFHV1Y1ejB3aS9GS1A3d2dyK0FDUkRMYUczeCIsImF1dGgiOiJZV040WTI5dWRISmxaM2QxY3pJNmFVeFVLemxLUzJkNGNIWXdOM2RyU1ZoRk9HUm1VMVJPYVhGSFYxWTFlakIzYVM5R1MxQTNkMmR5SzBGRFVrUk1ZVWN6ZUE9PSJ9fX0=

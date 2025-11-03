@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mario-clone
+  namespace: mario-game
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mario-clone
+  template:
+    metadata:
+      labels:
+        app: mario-clone
+    spec:
+      containers:
+        - name: mario-clone
+          image: mario-clone:v4
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+      imagePullSecrets:
+        - name: acr-auth
