@@ -5,10 +5,11 @@ metadata:
   namespace: mario-game
 spec:
   type: LoadBalancer
-  loadBalancerIP: "172.22.232.183"
+  loadBalancerIP: "172.25.10.200"
   selector:
     app: mario-clone
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+
