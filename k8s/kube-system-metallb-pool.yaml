@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   addresses:
-    - 172.22.86.148-172.22.86.149
+    - 172.25.10.200-172.25.10.201
   autoAssign: true
   avoidBuggyIPs: false
 ---

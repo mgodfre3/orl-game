@@ -8,9 +8,9 @@
 .PARAMETER ImageTag
     Docker image tag to use for the deployment. Default: latest
 .PARAMETER MarioIP
-    IP address for the Mario game LoadBalancer service. Default: 172.22.86.148
+    IP address for the Mario game LoadBalancer service. Default: 172.25.10.200
 .PARAMETER ArgoCDIP
-    IP address for the ArgoCD LoadBalancer service. Default: 172.22.86.149
+    IP address for the ArgoCD LoadBalancer service. Default: 172.25.10.201
 .PARAMETER SkipBuild
     Skip the Docker build and push step (use existing image)
 .PARAMETER UpdateGit
@@ -18,7 +18,7 @@
 .EXAMPLE
     .\deploy-mario.ps1
 .EXAMPLE
-    .\deploy-mario.ps1 -ImageTag v3 -MarioIP 172.22.86.150 -ArgoCDIP 172.22.86.151
+    .\deploy-mario.ps1 -ImageTag v3 -MarioIP 172.25.10.200 -ArgoCDIP 172.25.10.201
 .EXAMPLE
     .\deploy-mario.ps1 -SkipBuild -UpdateGit
 #>
@@ -32,10 +32,10 @@ param(
     [string]$ImageTag = "latest",
     
     [Parameter(Mandatory=$false)]
-    [string]$MarioIP = "172.22.86.148",
+    [string]$MarioIP = "172.25.10.200",
     
     [Parameter(Mandatory=$false)]
-    [string]$ArgoCDIP = "172.22.86.149",
+    [string]$ArgoCDIP = "172.25.10.201",
     
     [Parameter(Mandatory=$false)]
     [switch]$SkipBuild,
