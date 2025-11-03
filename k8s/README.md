@@ -50,7 +50,7 @@ If you're using ArgoCD, make sure to:
 
 The MetalLB configuration defines the IP address pool that LoadBalancer services can use:
 
-- **IP Pool**: `172.25.10.200/32` and `172.25.10.201/32`
+- **IP Pool**: Two individual IP addresses: `172.25.10.200` and `172.25.10.201`
 - **Namespace**: `kube-system` (required by MetalLB)
 - **Pool Name**: `mario-pool`
 
@@ -58,11 +58,20 @@ The MetalLB configuration defines the IP address pool that LoadBalancer services
 
 There are multiple MetalLB configuration files for different scenarios:
 
-1. **`metallb/metallb-config.yaml`** (Primary) - Uses IP range 172.25.10.200-201
-2. **`mario-metallb-config.yaml`** - Single IP configuration (172.25.10.200)
-3. **`kube-system-metallb-pool.yaml`** - Auto-assign pool (172.25.10.200-201)
+1. **`metallb/metallb-config.yaml`** (Primary, Recommended)
+   - Format: Two separate /32 addresses: `172.25.10.200/32` and `172.25.10.201/32`
+   - Includes both IPs needed for mario-clone (172.25.10.200) and argocd (172.25.10.201)
+   
+2. **`mario-metallb-config.yaml`** (Single IP)
+   - Format: Single /32 address: `172.25.10.200/32`
+   - Only includes IP for mario-clone service
+   
+3. **`kube-system-metallb-pool.yaml`** (Auto-assign)
+   - Format: IP range: `172.25.10.200-172.25.10.201`
+   - Auto-assigns IPs from the range
+   - Enables auto-assignment feature
 
-**Recommendation**: Use `metallb/metallb-config.yaml` for production deployments as it includes both IPs needed for mario-clone and argocd services.
+**Recommendation**: Use `metallb/metallb-config.yaml` for production deployments.
 
 ## Troubleshooting MetalLB IP Assignment
 
@@ -137,6 +146,20 @@ The Mario Clone service is configured as:
 - **Requested IP**: `172.25.10.200` (specified via `loadBalancerIP`)
 - **Port**: 80 (HTTP)
 - **Selector**: `app: mario-clone`
+
+### Note on loadBalancerIP Deprecation
+
+The `loadBalancerIP` field is deprecated in Kubernetes 1.24+ and may be removed in future versions. For better forward compatibility, consider using MetalLB-specific annotations instead:
+
+```yaml
+metadata:
+  annotations:
+    metallb.universe.tf/address-pool: mario-pool
+    # Or specify exact IP:
+    # metallb.universe.tf/loadBalancer-IPs: 172.25.10.200
+```
+
+For now, `loadBalancerIP` is still supported and works with MetalLB, but plan to migrate to annotations in future updates.
 
 ## Image Configuration
 
