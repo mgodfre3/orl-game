@@ -1,16 +1,19 @@
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
-  name: default-addresspool
-  namespace: metallb-system
+  name: mario-pool
+  namespace: kube-system
 spec:
   addresses:
-    - 172.22.86.148-172.22.86.149  # Range including both IPs
+  - 172.25.10.200/32
+  - 172.25.10.201/32
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: default
-  namespace: metallb-system
-spec: {}
+  name: mario-l2
+  namespace: kube-system
+spec:
+  ipAddressPools:
+  - mario-pool
 
