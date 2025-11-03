@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mario-clone
-          image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:latest
+          image: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone:v4
           ports:
             - containerPort: 80
           resources:
