@@ -14,5 +14,6 @@ resources:
 images:
   - name: mario-clone
     newName: acxcontregwus2-c6chcgfjardafsb5.azurecr.io/mario-clone
-    newTag: v4
+    newTag: v2
+
 
